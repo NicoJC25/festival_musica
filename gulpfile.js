@@ -1,23 +1,23 @@
-import {src, dest, watch} from 'gulp'
-import * as dartSass from 'sass'
-import gulpSass from 'gulp-sass'
+import {src, dest, watch} from 'gulp' // Imports from gulp dependence
+import * as dartSass from 'sass' // Imports  from sass dependence
+import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
 
-// export function hola( done ){
-//     console.log('Hola desde Gulpfile.js');
+// export function hola( done ){     // test function 
+//     console.log('Hola desde Gulpfile.js'); // Basic function
 
-//     done();
+//     done(); // "done()" is used for finish the gulp stream
 // }
 
-const sass = gulpSass(dartSass);
+const sass = gulpSass(dartSass); // variable for sass and gulp-sass connection
 
-export function css(done) {
-    src('src/scss/app.scss')
-        .pipe( sass().on('error', sass.logError) )
-        .pipe( dest('dist/css') );
+export function css(done) { // function for sass stream
+    src('src/scss/app.scss') // "src" means the main file where is sass
+        .pipe( sass().on('error', sass.logError) ) // "pipe" is for nesting methods in other functions / this pipe brings sass like source action
+        .pipe( dest('dist/css') ); // depending the order, "pipe" will execute first some methods / this pipe defines the destiny of css source
 
-    done();
+    done(); // finish the stream
 }
 
-export function dev() {
-    watch('src/scss/**/*.scss', css);
+export function dev() { // function for having the previous function always on
+    watch('src/scss/**/*.scss', css); // the "*" takes all the folders and files relationed with .scss termination for apply the previous function
 }
