@@ -1,9 +1,19 @@
+$main_font : "Montserrat", sans-serif;
+
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: $main_font;
     font-optical-sizing: auto;
     font-style: normal;
 }
 
 h1 {
-    font-weight: 900;
+    font-family: $main_font;
+}
+
+p {
+    font-family: $main_font;
+}
+
+a {
+    font-family: $main_font;
 }
