@@ -1,1 +1,2 @@
-@forward 'base/index'; /* For files without functions, only basic code */
+@forward 'base'; /* forward is used for files without functions, only basic code */
+@forward 'layout';
