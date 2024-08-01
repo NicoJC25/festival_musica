@@ -1,9 +1,1 @@
-@use 'base/variables' as *;
-@use 'base/normalize';
-
-body {
-    font-family: $main_font;
-    font-optical-sizing: auto;
-    font-style: normal;
-    color: $black;
-}
+@forward 'base/index'; /* For files without functions, only basic code */
