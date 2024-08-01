@@ -1,9 +1,18 @@
 @use 'base/variables' as *;
+@use 'base/mixins' as *;
 
 /* Header styles */
 
 .header {
     background-color: $green;
+    
+    @include phone { // include for mixins
+        color: $white;
+        width: 1rem;
+        height: 0.1rem;
+    }
+    
+
     .header-content {
         padding: 2rem;
         display: flex;
