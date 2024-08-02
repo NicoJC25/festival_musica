@@ -4,11 +4,7 @@ First project with SASS, npm and Gulp usage
 
 ## Package.json explanation
 
-This file has the required dependences for use SASS, Gulp and NPM.
-
-You can define the name of the package, git repository, and others.
-
-Things about local strings:
+Things about local scripts:
 
 - "sass" script is for execute the compiling for scss to css in native
 - "dev" script is for execute gulp function (explanation in gulpfile.js)
