@@ -1,4 +1,4 @@
-import {src, dest, watch} from 'gulp' // Imports from gulp dependence
+import {src, dest, watch, series, parallel} from 'gulp' // Imports from gulp dependence / paralell explanation
 import * as dartSass from 'sass' // Imports  from sass dependence
 import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
 
@@ -10,6 +10,14 @@ import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
 
 const sass = gulpSass(dartSass); // variable for sass and gulp-sass connection
 
+export function js(done) {
+
+    src('src/js/script.js')
+        .pipe(dest('dist/js'))
+
+    done();
+}
+
 export function css(done) { // function for sass stream
     src('src/scss/app.scss', {sourcemaps: true}) // "src" means the main file where is sass
         .pipe( sass().on('error', sass.logError) ) // "pipe" is for nesting methods in other functions / this pipe brings sass like source action
@@ -20,4 +28,7 @@ export function css(done) { // function for sass stream
 
 export function dev() { // function for having the previous function always on
     watch('src/scss/**/*.scss', css); // the "*" takes all the folders and files relationed with .scss termination for apply the previous function
+    watch('src/js/**/*.js', js);
 }
+
+export default series(js, css, dev)
