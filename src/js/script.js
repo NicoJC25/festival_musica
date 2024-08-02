@@ -1,6 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
+    staticNavigation();
     createGallery();
 });
+
+function staticNavigation() {
+    const header = document.querySelector('.header')
+    const aboutFestival = document.querySelector('.about-festival')
+
+    window.addEventListener('scroll', function () {
+        if(aboutFestival.getBoundingClientRect().bottom < 1) {
+            header.classList.add('fixed')
+        } else {
+            header.classList.remove('fixed')
+        }
+    });
+}
 
 function createGallery() {
     
