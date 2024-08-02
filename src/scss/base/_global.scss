@@ -1,4 +1,4 @@
-@use 'variables' as *; /*Prevents double usage / For files with many functions*/
+@use 'variables' as v; /*Prevents double usage / For files with many functions*/
 
 /* Global settings */
 
@@ -17,14 +17,14 @@ html {
 /* body */
 
 body {
-    font-family: $main_font;
+    font-family: v.$main_font;
     font-optical-sizing: auto;
     font-style: normal;
-    color: $black;
+    color: v.$black;
     font-size: 2rem;
 }
 p {
-    color: $black;
+    color: v.$black;
     line-height: 1.5;
 }
 .container {

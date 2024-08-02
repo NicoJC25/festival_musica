@@ -1,26 +1,26 @@
-@use 'variables' as *;
+@use 'variables' as v;
 
 /* Mixins for media query */
 
 @mixin phone {
-    @media (min-width: $phone) {
+    @media (min-width: v.$phone) {
         @content;
     }    
 }
 
 @mixin tablet {
-    @media (min-width: $tablet) {
+    @media (min-width: v.$tablet) {
         @content;
     }    
 }
 
 @mixin desktop {
-    @media (min-width: $desktop) {
+    @media (min-width: v.$desktop) {
         @content;
     }    
 }
 @mixin desktopXL {
-    @media (min-width: $desktopXL) {
+    @media (min-width: v.$desktopXL) {
         @content;
     }    
 }
