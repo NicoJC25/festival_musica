@@ -11,9 +11,9 @@ import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
 const sass = gulpSass(dartSass); // variable for sass and gulp-sass connection
 
 export function css(done) { // function for sass stream
-    src('src/scss/app.scss') // "src" means the main file where is sass
+    src('src/scss/app.scss', {sourcemaps: true}) // "src" means the main file where is sass
         .pipe( sass().on('error', sass.logError) ) // "pipe" is for nesting methods in other functions / this pipe brings sass like source action
-        .pipe( dest('dist/css') ); // depending the order, "pipe" will execute first some methods / this pipe defines the destiny of css source
+        .pipe( dest('dist/css', {sourcemaps: true}) ); // depending the order, "pipe" will execute first some methods / this pipe defines the destiny of css source
 
     done(); // finish the stream
 }
