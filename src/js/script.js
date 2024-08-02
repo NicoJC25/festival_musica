@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    crearGaleria();
+    createGallery();
 });
 
-function crearGaleria() {
+function createGallery() {
     
     const images_cant = 16;
     const gallery = document.querySelector('.gallery-images');
@@ -11,6 +11,52 @@ function crearGaleria() {
         const image = document.createElement('IMG')
         image.src = `src/img/gallery/full/${i}.jpg`
         image.alt = 'Imagen Galeria'
+
+        // Event Handler
+        image.onclick = function() {
+            showImage(i)
+        }
+
         gallery.appendChild(image);
     }
+}
+
+function showImage(i) {
+
+    const image = document.createElement('IMG')
+    image.src = `src/img/gallery/full/${i}.jpg`
+    image.alt = 'Imagen Galeria'
+    
+
+    // Generate Modal
+    const modal = document.createElement('DIV')
+    modal.classList.add('modal')
+    modal.onclick = closeModal
+
+    //Close modal button
+
+    const closeModalBtn = document.createElement('BUTTON')
+    closeModalBtn.textContent = 'X'
+    closeModalBtn.classList.add('btn-close')
+    closeModalBtn.onclick = closeModal
+    
+    modal.appendChild(image)
+    modal.appendChild(closeModalBtn)
+
+    // Append to HTML
+    const body = document.querySelector('body')
+    body.classList.add('overflow-hidden')
+    body.appendChild(modal)
+}
+
+function closeModal() {
+    const modal = document.querySelector('.modal');
+    modal.classList.add('fade-out')
+
+    setTimeout(() => {
+        modal?.remove()
+
+        const body = document.querySelector('body')
+        body.classList.remove('overflow-hidden')
+    }, 500);
 }
