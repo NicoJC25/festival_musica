@@ -25,10 +25,10 @@ function createGallery() {
 
     for(let i = 1; i <= images_cant; i++) {
         const image = document.createElement('PICTURE')
-        imagen.innerHTML = `
-            <source srcset="build/img/gallery/thumb/${i}.avif" type="image/avif">
-            <source srcset="build/img/gallery/thumb/${i}.webp" type="image/webp">
-            <img loading="lazy" width="200" height="300" src="build/img/gallery/thumb/${i}.jpg" alt="imagen galeria">
+        image.innerHTML = `
+            <source srcset="dist/img/gallery/thumb/${i}.avif" type="image/avif">
+            <source srcset="dist/img/gallery/thumb/${i}.webp" type="image/webp">
+            <img loading="lazy" width="200" height="300" src="dist/img/gallery/thumb/${i}.jpg" alt="imagen galeria">
         `;       
 
         // Event Handler
@@ -43,10 +43,10 @@ function createGallery() {
 function showImage(i) {
 
     const image = document.createElement('PICTURE')
-    imagen.innerHTML = `
-        <source srcset="build/img/gallery/full/${i}.avif" type="image/avif">
-        <source srcset="build/img/gallery/full/${i}.webp" type="image/webp">
-        <img loading="lazy" width="200" height="300" src="build/img/gallery/full/${i}.jpg" alt="imagen galeria">
+    image.innerHTML = `
+        <source srcset="dist/img/gallery/full/${i}.avif" type="image/avif">
+        <source srcset="dist/img/gallery/full/${i}.webp" type="image/webp">
+        <img loading="lazy" width="200" height="300" src="dist/img/gallery/full/${i}.jpg" alt="imagen galeria">
     `;       
     
 
