@@ -24,11 +24,11 @@ function createGallery() {
     const gallery = document.querySelector('.gallery-images');
 
     for(let i = 1; i <= images_cant; i++) {
+        const image = document.createElement('IMG')
         image.loading = 'lazy' // Lazy load
         image.width = "300"
         image.height = "200"
-        const image = document.createElement('IMG')
-        image.src = `src/img/gallery/full/${i}.jpg`
+        image.src = `src/img/gallery/thumb/${i}.jpg` // Change to thumb
         image.alt = 'Imagen Galeria'        
 
         // Event Handler

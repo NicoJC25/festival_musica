@@ -1,3 +1,5 @@
+import path from 'path' // Import for "crop" function
+import fs from 'fs' // Import for "crop" function
 import {src, dest, watch, series, parallel} from 'gulp' // Imports from gulp dependence / paralell explanation
 import * as dartSass from 'sass' // Imports  from sass dependence
 import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
@@ -11,6 +13,7 @@ import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
 const sass = gulpSass(dartSass); // variable for sass and gulp-sass connection
 
 import terser from 'gulp-terser' // Import "terser" for minify js files, remember "npm i --save-dev gulp-terser" 
+import sharp from 'sharp' // Import "sharp" for resizing images. Remember "npm i --save-dev sharp"
 
 export function js(done) {
 
@@ -31,9 +34,37 @@ export function css(done) { // function for sass stream
     done(); // finish the stream
 }
 
+export async function crop(done) { 
+    const inputFolder = 'src/img/gallery/full'
+    const outputFolder = 'src/img/gallery/thumb';
+    const width = 250; // Size is custom
+    const height = 180; // Size is custom
+    if (!fs.existsSync(outputFolder)) {
+        fs.mkdirSync(outputFolder, { recursive: true })
+    }
+    const images = fs.readdirSync(inputFolder).filter(file => {
+        return /\.(jpg)$/i.test(path.extname(file));
+    });
+    try {
+        images.forEach(file => {
+            const inputFile = path.join(inputFolder, file)
+            const outputFile = path.join(outputFolder, file)
+            sharp(inputFile) 
+                .resize(width, height, {
+                    position: 'centre' // Orientation is custom
+                })
+                .toFile(outputFile)
+        });
+
+        done()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export function dev() { // function for having the previous function always on
     watch('src/scss/**/*.scss', css); // the "*" takes all the folders and files relationed with .scss termination for apply the previous function
     watch('src/js/**/*.js', js);
 }
 
-export default series(js, css, dev)
+export default series(crop, js, css, dev)
