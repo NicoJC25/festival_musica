@@ -24,9 +24,12 @@ function createGallery() {
     const gallery = document.querySelector('.gallery-images');
 
     for(let i = 1; i <= images_cant; i++) {
+        image.loading = 'lazy' // Lazy load
+        image.width = "300"
+        image.height = "200"
         const image = document.createElement('IMG')
         image.src = `src/img/gallery/full/${i}.jpg`
-        image.alt = 'Imagen Galeria'
+        image.alt = 'Imagen Galeria'        
 
         // Event Handler
         image.onclick = function() {

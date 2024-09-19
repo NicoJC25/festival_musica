@@ -29,7 +29,7 @@
                 <p>Julio 2026, Bogotá D.C, Colombia</p>
             </div>
         </div>
-        <video autoplay muted loop>
+        <video autoplay muted loop preload="auto"> <!-- Poner en los apuntes el pre-load  -->
             <source src="video/dj.mp4" type="video/mp4"/>
             <source src="video/dj.ogv" type="video/ogg"/>
             <source src="video/dj.webm" type="video/webm"/>
@@ -38,7 +38,7 @@
 
     <section class="about-festival">
         <div class="image">
-            <img src="src/img/imagen_dj.jpg" alt="Sobre festival">
+            <img width="300" height="200" loading="lazy" src="src/img/imagen_dj.jpg" alt="Sobre festival"> <!-- Lazy load, width and height required -->
         </div>
 
         <div class="festival-content">
