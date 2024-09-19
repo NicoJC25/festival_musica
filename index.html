@@ -38,7 +38,11 @@
 
     <section class="about-festival">
         <div class="image">
-            <img width="300" height="200" loading="lazy" src="src/img/imagen_dj.jpg" alt="Sobre festival"> <!-- Lazy load, width and height required -->
+            <picture>
+                <source srcset="build/img/imagen_dj.avif" type="image/avif" />
+                <source srcset="build/img/imagen_dj.webp" type="image/webp" />
+                <img width="300" height="200" loading="lazy" src="build/img/imagen_dj.jpg" alt="Sobre festival"> <!-- Lazy load, width and height required -->
+            </picture>
         </div>
 
         <div class="festival-content">
