@@ -10,9 +10,12 @@ import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
 
 const sass = gulpSass(dartSass); // variable for sass and gulp-sass connection
 
+import terser from 'gulp-terser' // Import "terser" for minify js files, remember "npm i --save-dev gulp-terser" 
+
 export function js(done) {
 
     src('src/js/script.js')
+        .pipe(terser()) // Adding js minify
         .pipe(dest('dist/js'))
 
     done();
@@ -20,7 +23,9 @@ export function js(done) {
 
 export function css(done) { // function for sass stream
     src('src/scss/app.scss', {sourcemaps: true}) // "src" means the main file where is sass
-        .pipe( sass().on('error', sass.logError) ) // "pipe" is for nesting methods in other functions / this pipe brings sass like source action
+        .pipe( sass({
+            outputStyle: 'compressed' // This own function is for minify the css files. No needed additional importations
+        }).on('error', sass.logError) ) // "pipe" is for nesting methods in other functions / this pipe brings sass like source action
         .pipe( dest('dist/css', {sourcemaps: true}) ); // depending the order, "pipe" will execute first some methods / this pipe defines the destiny of css source
 
     done(); // finish the stream
