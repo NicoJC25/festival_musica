@@ -1,5 +1,6 @@
 import path from 'path' // Import for "crop" function
 import fs from 'fs' // Import for "crop" function
+import { glob } from 'glob' // Remember to "npm i --save-dev glob"
 import {src, dest, watch, series, parallel} from 'gulp' // Imports from gulp dependence / paralell explanation
 import * as dartSass from 'sass' // Imports  from sass dependence
 import gulpSass from 'gulp-sass' // Imports from gulp-sass dependence
@@ -62,9 +63,40 @@ export async function crop(done) {
     }
 }
 
+
+export async function imagenes(done) {
+    const srcDir = './src/img';
+    const buildDir = './dist/img';
+    const images =  await glob('./src/img/**/*{jpg,png}')
+
+    images.forEach(file => {
+        const relativePath = path.relative(srcDir, path.dirname(file));
+        const outputSubDir = path.join(buildDir, relativePath);
+        procesarImagenes(file, outputSubDir);
+    });
+    done();
+}
+
+function procesarImagenes(file, outputSubDir) {
+    if (!fs.existsSync(outputSubDir)) {
+        fs.mkdirSync(outputSubDir, { recursive: true })
+    }
+    const baseName = path.basename(file, path.extname(file))
+    const extName = path.extname(file)
+    const outputFile = path.join(outputSubDir, `${baseName}${extName}`)
+    const outputFileWebp = path.join(outputSubDir, `${baseName}.webp`)
+    const outputFileAvif = path.join(outputSubDir, `${baseName}.avif`)
+
+    const options = { quality: 80 }
+    sharp(file).jpeg(options).toFile(outputFile)
+    sharp(file).webp(options).toFile(outputFileWebp)
+    sharp(file).avif().toFile(outputFileAvif)
+}
+
 export function dev() { // function for having the previous function always on
     watch('src/scss/**/*.scss', css); // the "*" takes all the folders and files relationed with .scss termination for apply the previous function
     watch('src/js/**/*.js', js);
+    watch('src/img/**/*.{png,jpg}', js);
 }
 
-export default series(crop, js, css, dev)
+export default series(crop, js, css, imagenes, dev)
